@@ -12,16 +12,11 @@ const firebaseConfig = {
     measurementId: "G-LYR28TRBBC"
 };
 
-const githubProvider = new GithubAuthProvider()
-githubProvider.addScope('read:user');
-githubProvider.setCustomParameters({
-    // @ts-ignore
-    allow_signup : false
-});
+
 
 const app = initializeApp(firebaseConfig)
-const db = getFirestore(app)
 const auth = getAuth(app)
-
+const githubProvider = new GithubAuthProvider()
+const db = getFirestore(app)
 
 export {app, db, auth, githubProvider}
