@@ -69,8 +69,9 @@ const Home: NextPage = () => {
                 pullRequests: prResponse.items
             })
         }
+        console.log(leaderboard)
         leaderboard.sort((i1,i2)=> {
-            return i1.pullRequests.length > i2.pullRequests.length ? 1 : 0
+            return i2.pullRequests.length - i1.pullRequests.length
         })
         return leaderboard
     }
@@ -111,7 +112,6 @@ const Home: NextPage = () => {
                             signInWithPopup(auth,githubProvider)
                                 .then(result => {
                                     addUser(result.user)
-                                    // router.reload()
                                 })
                                 .catch(error=> {
                                     console.error(error)
@@ -131,7 +131,7 @@ const Home: NextPage = () => {
                     <div>
                         {
                             itemList.map((item,i)=> {
-                                return <LeaderboardItem item={item} key={i} />
+                                return <LeaderboardItem item={item} rank={i+1} key={i} />
                             })
                         }
                     </div>
