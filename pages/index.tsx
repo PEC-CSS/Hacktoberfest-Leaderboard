@@ -9,7 +9,8 @@ import {collection, doc, getDoc, query, setDoc} from "@firebase/firestore";
 import {useCollectionData, useDocumentData} from "react-firebase-hooks/firestore";
 import {useRouter} from "next/router";
 import axios from "axios";
-import {any} from "prop-types";
+import Lottie from "react-lottie-player";
+import loadingAnimation from '../public/loadinganimation.json'
 import {LeaderboardItem} from "../components/LeaderboardItem";
 
 export type UserInfo = {
@@ -125,13 +126,29 @@ const Home: NextPage = () => {
             <div className="w-[100%] text-center font-bold text-[50px]">
                 Leaderboard
             </div>
-            <div>
-                {
-                    itemList?.map((item,i)=> {
-                        return <LeaderboardItem item={item} key={i} />
-                    })
-                }
-            </div>
+            {
+                itemList.length > 0 ? (
+                    <div>
+                        {
+                            itemList.map((item,i)=> {
+                                return <LeaderboardItem item={item} key={i} />
+                            })
+                        }
+                    </div>
+                ) : (
+                    <div className="flex flex-col items-center justify-center rounded-[60px] m-auto h-[60vh]">
+                        <Lottie
+                            animationData = {loadingAnimation}
+                            play
+                            loop
+                            className="h-[140px]"
+                        />
+                        <div className="font-bold text-[28px]">
+                            Loading
+                        </div>
+                    </div>
+                )
+            }
         </div>
     )
 }
