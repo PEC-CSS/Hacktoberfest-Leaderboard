@@ -111,7 +111,7 @@ const Home: NextPage = () => {
                             signInWithPopup(auth,githubProvider)
                                 .then(result => {
                                     addUser(result.user)
-                                    router.reload()
+                                    // router.reload()
                                 })
                                 .catch(error=> {
                                     console.error(error)
