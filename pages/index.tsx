@@ -60,7 +60,7 @@ const Home: NextPage = () => {
                 method : "GET",
                 url: `https://api.github.com/search/issues?per_page=100&q=author:${users[i].username}+type:pr`,
                 headers: {
-                    "Authorization" : `token ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
+                    "Authorization" : `token ${process.env.access_token}`
                 }
             })
             let prResponse: PullRequestResponse = response.data
@@ -75,11 +75,6 @@ const Home: NextPage = () => {
         })
         return leaderboard
     }
-
-    // useEffect(()=>{
-    //     if(auth.currentUser)
-    //         addUser(auth.currentUser!)
-    // },[])
 
     useEffect(()=> {
         if(!users)
