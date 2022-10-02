@@ -12,6 +12,7 @@ import axios from "axios";
 import Lottie from "react-lottie-player";
 import loadingAnimation from '../public/loadinganimation.json'
 import {LeaderboardItem} from "../components/LeaderboardItem";
+import {useAuthState} from "react-firebase-hooks/auth";
 
 export type UserInfo = {
     uid: string,
@@ -34,6 +35,7 @@ export type PullRequestResponse = {
 
 const Home: NextPage = () => {
     const router = useRouter()
+    const [user] = useAuthState(auth);
     // @ts-ignore
     const [users] : [UserInfo[] | undefined] = useCollectionData(query(collection(db,"Users")))
     const [itemList,setItemList] : [Item[],any] = useState([])
@@ -41,19 +43,14 @@ const Home: NextPage = () => {
     const [currentUser] : [UserInfo | undefined] = useDocumentData(doc(db,"Users",auth.currentUser?.uid || "lol"))
 
     const addUser = (user : User)=> {
-        getDoc(doc(db,"Users",user.uid))
-            .then(snapshot => {
-                if(!snapshot.exists()) {
-                    setDoc(doc(db,"Users",user.uid),{
-                        uid: user.uid,
-                        displayName: user.displayName,
-                        email: user.email,
-                        photoUrl: user.photoURL,
-                        // @ts-ignore
-                        username: user.reloadUserInfo?.screenName
-                    }).catch(error=> console.error(error))
-                }
-            }).catch(error => console.error(error))
+        setDoc(doc(db,"Users",user.uid),{
+            uid: user.uid,
+            displayName: user.displayName,
+            email: user.email,
+            photoUrl: user.photoURL,
+            // @ts-ignore
+            username: user.reloadUserInfo?.screenName
+        }).catch(error=> console.error(error))
     }
 
     const getPullRequests = async (users: UserInfo[])=> {
@@ -76,10 +73,10 @@ const Home: NextPage = () => {
         return leaderboard
     }
 
-    useEffect(()=>{
-        if(auth.currentUser)
-            addUser(auth.currentUser!)
-    },[])
+    // useEffect(()=>{
+    //     if(auth.currentUser)
+    //         addUser(auth.currentUser!)
+    // },[])
 
     useEffect(()=> {
         if(!users)
@@ -97,11 +94,10 @@ const Home: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {
-                auth.currentUser ? (
+                user ? (
                     <Button
                         onClick={()=> {
                             signOut(auth)
-                                .then(()=> router.reload())
                                 .catch(error => console.error(error))
                         }}>
                         {currentUser?.username || "Sadge"}
