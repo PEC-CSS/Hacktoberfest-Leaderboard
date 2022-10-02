@@ -58,7 +58,10 @@ const Home: NextPage = () => {
         for(let i = 0; i<users.length; i++) {
             let response = await axios({
                 method : "GET",
-                url: `https://api.github.com/search/issues?per_page=100&q=author:${users[i].username}+type:pr`
+                url: `https://api.github.com/search/issues?per_page=100&q=author:${users[i].username}+type:pr`,
+                headers: {
+                    "Authorization" : `token ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`
+                }
             })
             let prResponse: PullRequestResponse = response.data
             leaderboard.push({
