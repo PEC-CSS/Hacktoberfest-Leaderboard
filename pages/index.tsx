@@ -56,16 +56,31 @@ const Home: NextPage = () => {
 
     const getPullRequests = async (users: UserInfo[])=> {
         let leaderboard: Item[] = []
+        let request = "GET /search/issues?per_page=100&q=type%3Apr+label%3Ahacktoberfest-accepted"
+        let pullRequests = new Map<string,any[]>()
         for(let i = 0; i<users.length; i++) {
-            let response = await octokit.request("GET /search/issues?per_page=100&q=author:{author}+type%3Apr", {
-                author: users[i].username
-            })
-            let prResponse: PullRequestResponse = response.data
-            leaderboard.push({
-                user: users[i],
-                pullRequests: prResponse.items
-            })
+            request += `+author%3A${users[i].username}`
+            // @ts-ignore
+            pullRequests.set(users[i].username,[])
         }
+        let response = await octokit.request(request)
+        let prResponse: PullRequestResponse = response.data
+        console.log(prResponse)
+
+        prResponse.items.forEach((pr: any,i: number)=> {
+            let username: string = pr.user.login
+            pullRequests.get(username)?.push(pr)
+        })
+        pullRequests.forEach((prs,username) => {
+            leaderboard.push({
+                // @ts-ignore
+                user: users.find((user)=> {
+                    return user.username === username
+                }),
+                pullRequests: prs
+            })
+        })
+
         console.log(leaderboard)
         leaderboard.sort((i1,i2)=> {
             return i2.pullRequests.length - i1.pullRequests.length
