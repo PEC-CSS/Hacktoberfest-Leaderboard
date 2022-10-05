@@ -1,18 +1,18 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import {app, auth, db, githubProvider, octokit} from "../firebase";
-import {Dispatch, SetStateAction, useEffect, useState} from "react";
+import {auth, db, githubProvider} from "../firebase";
+import {useEffect, useState} from "react";
 import {Button} from "@mui/material";
 import {FaGithub} from "react-icons/fa";
 import {signInWithPopup, signOut, User} from "@firebase/auth";
 import {collection, doc, getDoc, query, setDoc} from "@firebase/firestore";
 import {useCollectionData, useDocumentData} from "react-firebase-hooks/firestore";
 import {useRouter} from "next/router";
-import axios from "axios";
 import Lottie from "react-lottie-player";
 import loadingAnimation from '../public/loadinganimation.json'
 import {LeaderboardItem} from "../components/LeaderboardItem";
 import {useAuthState} from "react-firebase-hooks/auth";
+import {Octokit} from "octokit";
 
 export type UserInfo = {
     uid: string,
@@ -55,6 +55,7 @@ const Home: NextPage = () => {
     }
 
     const getPullRequests = async (users: UserInfo[])=> {
+        const octokit = new Octokit({auth: process.env.ACCESS_TOKEN})
         let leaderboard: Item[] = []
         let request = "GET /search/issues?per_page=100&q=type%3Apr+label%3Ahacktoberfest-accepted"
         let pullRequests = new Map<string,any[]>()

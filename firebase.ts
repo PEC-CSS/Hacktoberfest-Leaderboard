@@ -19,6 +19,5 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const githubProvider = new GithubAuthProvider()
 const db = getFirestore(app)
-const octokit = new Octokit({auth: process.env.ACCESS_TOKEN})
 
-export {app, db, auth, githubProvider, octokit}
+export {app, db, auth, githubProvider}
