@@ -138,7 +138,7 @@ const Home: NextPage = () => {
                 !loading ? (
                     <div>
                         {
-                            itemList.map((item,i)=> {
+                            itemList.length > 0 && itemList.map((item,i)=> {
                                 return <LeaderboardItem item={item} rank={i+1} key={i} />
                             })
                         }
