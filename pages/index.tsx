@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import {app, auth, db, githubProvider} from "../firebase";
+import {app, auth, db, githubProvider, octokit} from "../firebase";
 import {Dispatch, SetStateAction, useEffect, useState} from "react";
 import {Button} from "@mui/material";
 import {FaGithub} from "react-icons/fa";
@@ -37,10 +37,11 @@ const Home: NextPage = () => {
     const router = useRouter()
     const [user] = useAuthState(auth);
     // @ts-ignore
-    const [users] : [UserInfo[] | undefined] = useCollectionData(query(collection(db,"Users")))
-    const [itemList,setItemList] : [Item[],any] = useState([])
+    const [users] = useCollectionData<UserInfo>(query(collection(db,"Users")))
+    const [itemList,setItemList] = useState<Item[]>([])
+    const [loading,setLoading] = useState(false)
     // @ts-ignore
-    const [currentUser] : [UserInfo | undefined] = useDocumentData(doc(db,"Users",auth.currentUser?.uid || "lol"))
+    const [currentUser] = useDocumentData<UserInfo>(doc(db,"Users",auth.currentUser?.uid || "lol"))
 
     const addUser = (user : User)=> {
         setDoc(doc(db,"Users",user.uid),{
@@ -56,12 +57,8 @@ const Home: NextPage = () => {
     const getPullRequests = async (users: UserInfo[])=> {
         let leaderboard: Item[] = []
         for(let i = 0; i<users.length; i++) {
-            let response = await axios({
-                method : "GET",
-                url: `https://api.github.com/search/issues?per_page=100&q=author:${users[i].username}+type:pr`,
-                headers: {
-                    "Authorization" : `token ${process.env.access_token}`
-                }
+            let response = await octokit.request("GET /search/issues?per_page=100&q=author:{author}+type%3Apr", {
+                author: users[i].username
             })
             let prResponse: PullRequestResponse = response.data
             leaderboard.push({
@@ -79,9 +76,11 @@ const Home: NextPage = () => {
     useEffect(()=> {
         if(!users)
             return
+        setLoading(true)
         getPullRequests(users)
             .then(leaderboard => setItemList(leaderboard))
             .catch(error=> console.error(error))
+            .finally(()=> setLoading(false))
     },[users])
 
     return (
@@ -121,7 +120,7 @@ const Home: NextPage = () => {
                 Leaderboard
             </div>
             {
-                itemList.length > 0 ? (
+                !loading ? (
                     <div>
                         {
                             itemList.map((item,i)=> {

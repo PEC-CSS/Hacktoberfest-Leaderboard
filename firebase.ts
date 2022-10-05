@@ -1,6 +1,7 @@
 import {initializeApp} from "@firebase/app";
 import {getFirestore} from "@firebase/firestore";
 import {getAuth, GithubAuthProvider} from "@firebase/auth";
+import {Octokit} from "octokit";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDzuGH97Hhkfb9ovotps5xlZOy3Efw0fhw",
@@ -18,5 +19,6 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const githubProvider = new GithubAuthProvider()
 const db = getFirestore(app)
+const octokit = new Octokit({auth: process.env.ACCESS_TOKEN})
 
-export {app, db, auth, githubProvider}
+export {app, db, auth, githubProvider, octokit}
