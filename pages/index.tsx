@@ -35,7 +35,6 @@ export type PullRequestResponse = {
 
 const Home: NextPage = () => {
     const router = useRouter()
-    const octokit = new Octokit({auth: process.env.ACCESS_TOKEN})
     const [user] = useAuthState(auth);
     // @ts-ignore
     const [users] = useCollectionData<UserInfo>(query(collection(db,"Users")))
@@ -56,6 +55,7 @@ const Home: NextPage = () => {
     }
 
     const getPullRequests = async (users: UserInfo[])=> {
+        const octokit = new Octokit({auth: process.env.access_token})
         let leaderboard: Item[] = []
         let request = "GET /search/issues?per_page=100&q=type%3Apr+label%3Ahacktoberfest-accepted"
         let pullRequests = new Map<string,any[]>()
@@ -90,6 +90,7 @@ const Home: NextPage = () => {
     }
 
     useEffect(()=> {
+        console.log(process.env.access_token)
         if(!users)
             return
         setLoading(true)
