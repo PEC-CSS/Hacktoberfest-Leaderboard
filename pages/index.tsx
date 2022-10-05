@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {Button} from "@mui/material";
 import {FaGithub} from "react-icons/fa";
 import {signInWithPopup, signOut, User} from "@firebase/auth";
-import {collection, doc, getDoc, query, setDoc} from "@firebase/firestore";
+import {collection, doc, query, setDoc} from "@firebase/firestore";
 import {useCollectionData, useDocumentData} from "react-firebase-hooks/firestore";
 import {useRouter} from "next/router";
 import Lottie from "react-lottie-player";
@@ -73,6 +73,7 @@ const Home: NextPage = () => {
             pullRequests.get(username)?.push(pr)
         })
         pullRequests.forEach((prs,username) => {
+            console.log(username,prs)
             leaderboard.push({
                 // @ts-ignore
                 user: users.find((user)=> {
@@ -90,7 +91,6 @@ const Home: NextPage = () => {
     }
 
     useEffect(()=> {
-        console.log(process.env.access_token)
         if(!users)
             return
         setLoading(true)
