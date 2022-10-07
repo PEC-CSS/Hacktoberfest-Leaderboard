@@ -115,7 +115,10 @@ const Home: NextPage = () => {
         setLoading(true)
         getPullRequests(users)
             .then(leaderboard => setItemList(leaderboard))
-            .catch(error=> console.error(error))
+            .catch(error=> {
+                console.log('ono getting prs failed')
+                console.error(error)
+            })
             .finally(()=> setLoading(false))
     },[users])
 
