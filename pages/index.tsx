@@ -57,21 +57,56 @@ const Home: NextPage = () => {
     const getPullRequests = async (users: UserInfo[])=> {
         const octokit = new Octokit({auth: process.env.access_token})
         let leaderboard: Item[] = []
-        let request = "GET /search/issues?per_page=100&q=type%3Apr+label%3Ahacktoberfest-accepted"
+        let request = "GET /search/issues?per_page=100&q=type%3Apr+created:2022-10-01..2022-10-31"
+        let repoNames = new Set<string>()
         let pullRequests = new Map<string,any[]>()
+
         for(let i = 0; i<users.length; i++) {
             request += `+author%3A${users[i].username}`
             // @ts-ignore
             pullRequests.set(users[i].username,[])
         }
+
         let response = await octokit.request(request)
         let prResponse: PullRequestResponse = response.data
         console.log(prResponse)
 
         prResponse.items.forEach((pr: any,i: number)=> {
-            let username: string = pr.user.login
-            pullRequests.get(username)?.push(pr)
+            repoNames.add(pr.repository_url.replace("https://api.github.com/repos/",""))
         })
+
+        // @ts-ignore
+        let repoRequests = [...repoNames].map((value: string)=>{
+            const [owner,repo] = value.split("/")
+            return octokit.rest.repos.getAllTopics({owner, repo})
+                .then(res => ({repoName: value, topics: res.data.names}))
+        })
+
+        let repoTopics = await Promise.all(repoRequests)
+        let validRepos = new Set<string>()
+        console.log(repoTopics)
+
+        repoTopics.forEach((repo)=> {
+            if(repo.topics.find((topic)=>{
+                return topic.toLowerCase() === "hacktoberfest"
+            })) {
+                validRepos.add(repo.repoName)
+            }
+        })
+
+        console.log(validRepos)
+
+        prResponse.items.forEach((pr: any,i: number)=> {
+            let username: string = pr.user.login
+            let repo = pr.repository_url.replace("https://api.github.com/repos/","")
+
+            if(validRepos.has(repo) && ((pr.state === "closed" && pr.pull_request.merged_at) || pr.labels.find((label: any)=> {
+                return label.name.toLowerCase() === "hacktoberfest-accepted"
+            })) ) {
+                pullRequests.get(username)?.push(pr)
+            }
+        })
+
         pullRequests.forEach((prs,username) => {
             console.log(username,prs)
             leaderboard.push({
