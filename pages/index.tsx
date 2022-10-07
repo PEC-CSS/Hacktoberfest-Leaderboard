@@ -13,25 +13,7 @@ import loadingAnimation from '../public/loadinganimation.json'
 import {LeaderboardItem} from "../components/LeaderboardItem";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {Octokit} from "octokit";
-
-export type UserInfo = {
-    uid: string,
-    displayName: string,
-    email: string,
-    photoUrl?: string,
-    username?: string
-}
-
-export type Item = {
-    user: UserInfo,
-    pullRequests : any[]
-}
-
-export type PullRequestResponse = {
-    total_count: number,
-    incomplete_results: boolean,
-    items: any[]
-}
+import {Item, PullRequestResponse, UserInfo} from "../public/user";
 
 const Home: NextPage = () => {
     const router = useRouter()
@@ -50,12 +32,14 @@ const Home: NextPage = () => {
             email: user.email,
             photoUrl: user.photoURL,
             // @ts-ignore
-            username: user.reloadUserInfo?.screenName
+            username: user.reloadUserInfo.screenName
         }).catch(error=> console.error(error))
     }
 
     const getPullRequests = async (users: UserInfo[])=> {
         const octokit = new Octokit({auth: process.env.access_token})
+        console.log(octokit)
+
         let leaderboard: Item[] = []
         let request = "GET /search/issues?per_page=100&q=type%3Apr+created:2022-10-01..2022-10-31"
         let repoNames = new Set<string>()

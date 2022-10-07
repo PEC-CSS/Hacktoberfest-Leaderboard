@@ -1,5 +1,5 @@
-import {Item} from "../pages";
 import {auth} from "../firebase";
+import {Item} from "../public/user";
 
 export const LeaderboardItem = ({item,rank}: {item : Item,rank: number}) => {
     return (
