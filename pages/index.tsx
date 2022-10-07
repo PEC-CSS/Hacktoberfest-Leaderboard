@@ -37,8 +37,8 @@ const Home: NextPage = () => {
     }
 
     const getPullRequests = async (users: UserInfo[])=> {
+        console.log("boom boom")
         const octokit = new Octokit({auth: process.env.access_token})
-        console.log(octokit)
 
         let leaderboard: Item[] = []
         let request = "GET /search/issues?per_page=100&q=type%3Apr+created:2022-10-01..2022-10-31"
