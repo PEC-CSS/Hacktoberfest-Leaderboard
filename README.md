@@ -1,34 +1,194 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div id="top"></div>
+
+<!-- PROJECT SHIELDS-->
+
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+<!-- PROJECT LOGO -->
+<div align="center">
+    <br>
+  <h3 align="center">Hacktoberfest Leaderboard</h3>
+
+  <p align="center">
+    <p>Leaderboard for Hacktoberfest 2022.</p>
+
+<a href="https://github.com/PEC-CSS/Hacktoberfest-Leaderboard"><strong>Explore the docs »</strong></a>
+<br />
+<a href="https://github.com/PEC-CSS/Hacktoberfest-Leaderboard">View Demo</a>
+·
+<a href="https://github.com/PEC-CSS/Hacktoberfest-Leaderboard/issues">Report Bug</a>
+·
+<a href="https://github.com/PEC-CSS/Hacktoberfest-Leaderboard/issues">Request Feature</a>
+
+  </p>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+        <a href="#about-the-project">About The Project</a>
+        <ul>
+          <li><a href="#built-with">Built With</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#getting-started">Getting Started</a>
+        <ul>
+          <li><a href="#prerequisites">Prerequisites</a></li>
+          <li><a href="#installation">Installation</a></li>
+        </ul>
+      </li>
+      <li><a href="#usage">Usage</a></li>
+<!--       <li><a href="#roadmap">Roadmap</a></li> -->
+      <li><a href="#contributing">Contributing</a></li>
+      <li><a href="#license">License</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
+
+<!-- ABOUT THE PROJECT -->
+
+## About The Project
+
+<p align=>
+Hacktoberfest Leaderboard is an open source application that displays a list of users, ranked based on how much contributions they have made during Hacktoberfest 2022.
+</p>
+
+<!-- BUILT WITH -->
+
+### Built With
+
+<a href="">
+<img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
+</a>
+<a href="">
+<img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white" />
+</a>
+<a href="">
+<img src="https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white" />
+</a>
+<a href="https://firebase.google.com/">
+<img src="https://img.shields.io/badge/firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black" />
+</a>
+
+<!-- GETTING STARTED-->
 
 ## Getting Started
 
-First, run the development server:
+To get a local copy up and running, follow these simple example steps.
+
+### Prerequisites
+
+- npm
+  ```
+  npm install npm@latest -g
+  ```
+
+### Installation
+
+_Below is an example of how you can install and set up your app._
+
+1. Clone the repo
+   ```bash
+    git clone https://github.com/PEC-CSS/Hacktoberfest-Leaderboard.git
+   ```
+2. Install npm packages
+
+   ```bash
+    npm install
+    #or
+    yarn install
+   ```
+
+<!-- USAGE -->
+
+## Usage
+
+Start the project:
 
 ```bash
-npm run dev
-# or
-yarn dev
+  npm run dev
+  #or
+  yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Contributors
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+This project exists thanks to all the people who contribute. [<a href="#contributing">Contributing</a>].
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<a href="https://github.com/PEC-CSS/Hacktoberfext-Leaderboard/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=PEC-CSS/Hacktoberfest-Leaderboard" />
+</a>
 
-## Learn More
+See the [open issues](https://github.com/PEC-CSS/Hacktoberfest-Leaderboard/issues) for a full list of proposed features (and known issues).
 
-To learn more about Next.js, take a look at the following resources:
+<!-- CONTRIBUTING -->
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-## Deploy on Vercel
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Be sure to read the [contribution guidelines](CONTRIBUTING.md) before contributing.
+
+<!-- LICENSE -->
+
+## License
+
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
+
+<!-- CONTACT -->
+
+## Contact
+
+[Rahul Sharma](https://rahulsharma.vercel.app/) - acmcss@pec.edu.in - rahul2702sharma@gmail.com
+
+Project Link: [https://github.com/PEC-CSS/Hacktoberfest-Leaderboard](https://github.com/PEC-CSS/Hacktoberfest-Leaderboard)
+
+<!-- ACKNOWLEDGMENTS -->
+
+## Acknowledgments
+
+Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Learn Next.js](https://nextjs.org/learn/)
+- [Github API](https://docs.github.com/en/developers/overview/about-githubs-apis)
+- [Shields.io](https://shields.io)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs/installation)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[contributors-shield]: https://img.shields.io/github/contributors/PEC-CSS/Hacktoberfest-Leaderboard?color=green&style=for-the-badge
+[contributors-url]: https://github.com/PEC-CSS/Hacktoberfest-Leaderboard/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/PEC-CSS/Hacktoberfest-Leaderboard?style=for-the-badge
+[forks-url]: https://github.com/PEC-CSS/Hacktoberfest-Leaderboard/network/members
+[stars-shield]: https://img.shields.io/github/stars/PEC-CSS/Hacktoberfest-Leaderboard?style=for-the-badge
+[stars-url]: https://github.com/PEC-CSS/Hacktoberfest-Leaderboard/stargazers
+[issues-shield]: https://img.shields.io/github/issues/PEC-CSS/Hacktoberfest-Leaderboard?style=for-the-badge
+[issues-url]: https://github.com/PEC-CSS/Hacktoberfest-Leaderboard/issues
+[license-shield]: https://img.shields.io/github/license/PEC-CSS/Hacktoberfest-Leaderboard?style=for-the-badge
+[license-url]: https://github.com/PEC-CSS/Hacktoberfest-Leaderboard/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://in.linkedin.com/company/pec-acm-student-chapter
