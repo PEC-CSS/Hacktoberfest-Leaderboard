@@ -78,6 +78,10 @@ Hacktoberfest Leaderboard is an open source application that displays a list of 
 <a href="https://firebase.google.com/">
 <img src="https://img.shields.io/badge/firebase-ffca28?style=for-the-badge&logo=firebase&logoColor=black" />
 </a>
+<a href="">
+<img src="https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white" />
+</a>
+
 
 <!-- GETTING STARTED-->
 
@@ -86,10 +90,14 @@ Hacktoberfest Leaderboard is an open source application that displays a list of 
 To get a local copy up and running, follow these simple example steps.
 
 ### Prerequisites
-
+- [Node.js](https://nodejs.org/en/)
 - npm
   ```
   npm install npm@latest -g
+  ```
+- yarn
+  ```
+  npm install --global yarn
   ```
 
 ### Installation
@@ -103,10 +111,13 @@ _Below is an example of how you can install and set up your app._
 2. Install npm packages
 
    ```bash
-    npm install
-    #or
     yarn install
    ```
+3. Create a `.env.local` file in the root of the project and create an environment variable for your Github Pearsonal Access Token.
+   ```env
+   ACCESS_TOKEN=<Your personal access token>
+   ```
+   You can refer the [Github docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) on how to create a personal access token.
 
 <!-- USAGE -->
 
@@ -115,9 +126,7 @@ _Below is an example of how you can install and set up your app._
 Start the project:
 
 ```bash
-  npm run dev
-  #or
-  yarn dev
+  yarn run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -159,7 +168,7 @@ Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 ## Contact
 
-[Rahul Sharma](https://rahulsharma.vercel.app/) - acmcss@pec.edu.in - rahul2702sharma@gmail.com
+acmcss@pec.edu.in
 
 Project Link: [https://github.com/PEC-CSS/Hacktoberfest-Leaderboard](https://github.com/PEC-CSS/Hacktoberfest-Leaderboard)
 
