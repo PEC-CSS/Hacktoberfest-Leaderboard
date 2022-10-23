@@ -132,14 +132,19 @@ const Home: NextPage = () => {
                         <li className="mr-3">
                         {
                 user ? (
+                    <div className='flex items-center'>
+
+                    <img  className="h-7 rounded-[50%]"  src={currentUser?.photoUrl}/>
+
                     <Button
                         className=''
                         onClick={()=> {
                             signOut(auth)
-                                .catch(error => console.error(error))
+                            .catch(error => console.error(error))
                         }}>
                         {currentUser?.username || "Sadge"}
                     </Button>
+                    </div>
                 ) : (
                     <Button
                     className='bg-transparent text-xl hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'
