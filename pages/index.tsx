@@ -158,14 +158,14 @@ const Home: NextPage = () => {
                                 })
                         }}>
                         <FaGithub/>
-                        <span className='px-3'>Sign in</span>
+                        <span className='hidden sm:inline px-3'>Sign in</span>
                     </Button>
                 )
             }
                         </li>
                 </ul>
 
-            <div className="w-[100%] text-center font-bold text-[50px]">
+            <div className="w-[100%] text-center font-bold sm:text-[50px] text-[35px]">
                 Leaderboard
             </div>
             {
