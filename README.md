@@ -113,7 +113,7 @@ _Below is an example of how you can install and set up your app._
    ```bash
     yarn install
    ```
-3. Create a `.env.local` file in the root of the project and create an environment variable for your Github Pearsonal Access Token.
+3. Create a `.env.local` file in the root of the project and create an environment variable for your Github Personal Access Token.
    ```env
    ACCESS_TOKEN=<Your personal access token>
    ```
