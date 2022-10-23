@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {Button} from "@mui/material";
 import {FaGithub} from "react-icons/fa";
 import {signInWithPopup, signOut, User} from "@firebase/auth";
-import {collection, doc, query, setDoc} from "@firebase/firestore";
+import {collection, doc, DocumentReference, Query, query, setDoc} from "@firebase/firestore";
 import {useCollectionData, useDocumentData} from "react-firebase-hooks/firestore";
 import {useRouter} from "next/router";
 import Lottie from "react-lottie-player";
@@ -18,12 +18,10 @@ import {Item, PullRequestResponse, UserInfo} from "../public/user";
 const Home: NextPage = () => {
     const router = useRouter()
     const [user] = useAuthState(auth);
-    // @ts-ignore
-    const [users] = useCollectionData<UserInfo>(query(collection(db,"Users")))
+    const [users] = useCollectionData<UserInfo>(query(collection(db,"Users")) as Query<UserInfo>)
     const [itemList,setItemList] = useState<Item[]>([])
     const [loading,setLoading] = useState(false)
-    // @ts-ignore
-    const [currentUser] = useDocumentData<UserInfo>(doc(db,"Users",auth.currentUser?.uid || "lol"))
+    const [currentUser] = useDocumentData<UserInfo>(doc(db,"Users",auth.currentUser?.uid || "lol") as DocumentReference<UserInfo>)
 
     const addUser = (user : User)=> {
         setDoc(doc(db,"Users",user.uid),{
@@ -47,7 +45,6 @@ const Home: NextPage = () => {
 
         for(let i = 0; i<users.length; i++) {
             request += `+author%3A${users[i].username}`
-            // @ts-ignore
             pullRequests.set(users[i].username,[])
         }
 
@@ -94,10 +91,9 @@ const Home: NextPage = () => {
         pullRequests.forEach((prs,username) => {
             console.log(username,prs)
             leaderboard.push({
-                // @ts-ignore
                 user: users.find((user)=> {
                     return user.username === username
-                }),
+                })!,
                 pullRequests: prs
             })
         })
