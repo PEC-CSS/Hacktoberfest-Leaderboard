@@ -13,7 +13,7 @@ import loadingAnimation from '../public/loadinganimation.json'
 import {LeaderboardItem} from "../components/LeaderboardItem";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {Octokit} from "octokit";
-import {Item, PullRequestResponse, UserInfo} from "../public/user";
+import {Item, PullRequest, PullRequestResponse, UserInfo} from "../public/user";
 
 const Home: NextPage = () => {
     const router = useRouter()
@@ -41,7 +41,7 @@ const Home: NextPage = () => {
         let leaderboard: Item[] = []
         let request = "GET /search/issues?per_page=100&q=type%3Apr+created:2022-10-01..2022-10-31"
         let repoNames = new Set<string>()
-        let pullRequests = new Map<string,any[]>()
+        let pullRequests = new Map<string,PullRequest[]>()
 
         for(let i = 0; i<users.length; i++) {
             request += `+author%3A${users[i].username}`
@@ -52,7 +52,7 @@ const Home: NextPage = () => {
         let prResponse: PullRequestResponse = response.data
         console.log(prResponse)
 
-        prResponse.items.forEach((pr: any,i: number)=> {
+        prResponse.items.forEach((pr: PullRequest,i: number)=> {
             repoNames.add(pr.repository_url.replace("https://api.github.com/repos/",""))
         })
 
@@ -77,7 +77,7 @@ const Home: NextPage = () => {
 
         console.log(validRepos)
 
-        prResponse.items.forEach((pr: any,i: number)=> {
+        prResponse.items.forEach((pr: PullRequest,i: number)=> {
             let username: string = pr.user.login
             let repo = pr.repository_url.replace("https://api.github.com/repos/","")
 
