@@ -12,7 +12,7 @@ import Lottie from "react-lottie-player";
 import loadingAnimation from '../public/loadinganimation.json'
 import {LeaderboardItem} from "../components/LeaderboardItem";
 import {useAuthState} from "react-firebase-hooks/auth";
-import {Octokit} from "octokit";
+import {Octokit} from "@octokit/rest";
 import {Item, PullRequest, PullRequestResponse, UserInfo} from "../public/user";
 
 const Home: NextPage = () => {
@@ -59,7 +59,7 @@ const Home: NextPage = () => {
         // @ts-ignore
         let repoRequests = [...repoNames].map((value: string)=>{
             const [owner,repo] = value.split("/")
-            return octokit.rest.repos.getAllTopics({owner, repo})
+            return octokit.repos.getAllTopics({owner, repo})
                 .then(res => ({repoName: value, topics: res.data.names}))
         })
 
